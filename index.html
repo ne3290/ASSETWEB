@@ -128,9 +128,10 @@ function startExperience(button) {
     button.disabled = true;
 
     document.getElementById("bgMusic").play();
+    
     setTimeout(() => {
-        Box.remove();
-    }, 3500);
+    document.getElementById("Box").remove();
+}, 3500);
 
     setInterval(createBalloon, 4000);
 
@@ -194,4 +195,5 @@ function showLove() {
 
 </body>
 </html>
+
 
