@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Untuk Perempuan Kesayanganku 💕</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
@@ -17,61 +17,50 @@ body {
     overflow: hidden;
 }
 
-/* CONTAINER MOBILE */
+/* Container Tengah */
 .container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 85%;
-    max-width: 320px;
     background: white;
-    padding: 25px 20px;
-    border-radius: 20px;
+    padding: 40px;
+    border-radius: 25px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
-    transition: all 0.8s ease;
-}
-
-.container.hide {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+    z-index: 10;
 }
 
 h1 {
     font-family: 'Pacifico', cursive;
     color: #ff4da6;
-    font-size: 22px;
-    margin-bottom: 10px;
 }
 
 p {
     color: #ff66a3;
-    font-size: 14px;
-    margin-bottom: 15px;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
+    margin-top: 20px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     background: #ff66a3;
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-/* BALLOON */
+/* Balloon */
 .imageWrapper {
     position: fixed;
-    bottom: -200px;
-    animation: floatUp linear forwards;
+    bottom: -250px;
+    animation: floatUp 5s linear forwards;
 }
 
 .imageWrapper img {
-    width: 120px;
-    border-radius: 15px;
+    width: 200px;
+    border-radius: 20px;
 }
 
 @keyframes floatUp {
@@ -80,63 +69,49 @@ button {
     100% { transform: translateY(-120vh); opacity: 0; }
 }
 
-/* TYPING TEXT */
+/* Typing Text */
 .typingBox {
     position: fixed;
-    bottom: 18%;
+    bottom: 15%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    max-width: 320px;
+    width: 80%;
+    max-width: 600px;
     text-align: center;
     color: #ff3385;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-/* FALLING HEART */
-.heart {
-    position: fixed;
-    top: -10px;
-    font-size: 16px;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-}
-
-/* LOVE POP */
+/* Love Animation */
 .love {
     position: fixed;
-    bottom: 35%;
+    bottom: 30%;
     left: 50%;
     transform: translate(-50%, 0) scale(0);
-    font-size: 50px;
+    font-size: 40px;
     animation: loveGrow 1.5s forwards;
 }
 
 @keyframes loveGrow {
     0% { transform: translate(-50%,0) scale(0); }
-    50% { transform: translate(-50%,0) scale(1.4); }
+    50% { transform: translate(-50%,0) scale(1.5); }
     100% { transform: translate(-50%,0) scale(1); }
 }
 
 @keyframes loveExplode {
-    100% { transform: translate(-50%,0) scale(2.5); opacity: 0; }
+    0% { transform: translate(-50%,0) scale(1); opacity: 1; }
+    100% { transform: translate(-50%,0) scale(3); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="mainBox">
+<div class="container">
     <h1>Untuk Perempuan Kesayanganku 💕</h1>
     <p>Terima kasih ada dalam hidup orang 🤍</p>
-    <button onclick="startExperience()">Klik Sekali 💌</button>
+    <button onclick="startExperience(this)">Klik Sekali 💌</button>
 </div>
 
 <audio id="bgMusic" src="1.mp3" loop></audio>
@@ -145,17 +120,19 @@ button {
 let currentImage = 1;
 let started = false;
 
-function startExperience() {
+function startExperience(button) {
     if (started) return;
     started = true;
 
-    document.getElementById("mainBox").classList.add("hide");
+    button.innerText = "Orang akan selalu sayang awak 💕";
+    button.disabled = true;
+
     document.getElementById("bgMusic").play();
 
-    setInterval(createBalloon, 3500);
-    setInterval(createHeart, 800);
+    setInterval(createBalloon, 4000);
 
-    setTimeout(startTyping, 4000);
+    // Lepas 10 saat start typing
+    setTimeout(startTyping, 10000);
 }
 
 function createBalloon() {
@@ -168,43 +145,32 @@ function createBalloon() {
     img.src = currentImage + ".png";
 
     wrapper.appendChild(img);
-    wrapper.style.left = Math.random() * 85 + "vw";
-    wrapper.style.animationDuration = (4 + Math.random() * 2) + "s";
+    wrapper.style.left = Math.random() * 90 + "vw";
+    wrapper.style.animationDuration = (4 + Math.random() * 3) + "s";
 
     document.body.appendChild(wrapper);
-    setTimeout(() => wrapper.remove(), 6000);
+
+    setTimeout(() => wrapper.remove(), 7000);
 
     currentImage++;
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💗";
-
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (3 + Math.random() * 2) + "s";
-
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-}
-
 function startTyping() {
-    const text = "Orang tak tau nak cakap macam mana lagi kat awak tapi awak yang orang nak. Maaf kalau orang selalu overthinking. Orang janji akan baiki diri dan jadi laki idaman awak.";
-
+    const text = "Orang tak tau nak cakap macam mana lagi kat awak tapi awak yang orang nak. Maaf kalo orang selalu buat andaian sendiri, overthinking selalu jadi punca tapi hakikatnya ini lah. Orang akan baiki diri orang dan selalu jadi laki idaman awak.";
+    
     const box = document.createElement("div");
     box.classList.add("typingBox");
     document.body.appendChild(box);
 
     let i = 0;
-    const typing = setInterval(() => {
+    const typingInterval = setInterval(() => {
         box.innerHTML += text.charAt(i);
         i++;
         if (i >= text.length) {
-            clearInterval(typing);
+            clearInterval(typingInterval);
             showLove();
         }
-    }, 35);
+    }, 40);
 }
 
 function showLove() {
@@ -215,7 +181,7 @@ function showLove() {
 
     setTimeout(() => {
         love.style.animation = "loveExplode 1s forwards";
-    }, 2500);
+    }, 2000);
 
     setTimeout(() => {
         love.remove();
