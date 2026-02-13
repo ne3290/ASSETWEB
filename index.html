@@ -108,7 +108,7 @@ button {
 
 <body>
 
-<div class="container">
+<div class="container" id="Box">
     <h1>Untuk Perempuan Kesayanganku 💕</h1>
     <p>Terima kasih ada dalam hidup orang 🤍</p>
     <button onclick="startExperience(this)">Klik Sekali 💌</button>
@@ -128,6 +128,9 @@ function startExperience(button) {
     button.disabled = true;
 
     document.getElementById("bgMusic").play();
+    setTimeout(() => {
+        Box.remove();
+    }, 3500);
 
     setInterval(createBalloon, 4000);
 
@@ -191,3 +194,4 @@ function showLove() {
 
 </body>
 </html>
+
